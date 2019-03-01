@@ -5,6 +5,7 @@ sudo: false
 env:
   global:
   - HUGO_VERSION=0.52
+  - secure: "hguvp7Bn8BFpJTU5KdQY16vNozm+0kBkBrFkSw+5e0Nu4KzsA79RJVxQ1Ad1iRFKFixLZ6C7KKHFY42q+RO8XLmYdIXSbi454Qr38AULYN19Cjzrepff3cwaY2fJUszJd1ytyOc1BDbSSSNbCa1yapkAqq+cCsCpynuexwBIrQtOS7I3HFF1cuGxT1jvX+zcsJhbiAcR0U1iwhgeK0Tl4hJSBhijRGKenEfe6nZigynwAdgQ6MBs1gFrE82QP4atWfhp7mBRgyYR8F51wSquVWhRQPQBxXyCvtU03P2S+uUAPTeJ/FfMiWGxAgy1Mp6z57P7rxA7NJQsTWdUecRz7q2nTB9FdbvULdCQ5KZ28EIPFFsaTS+IwfxV3vjDeE8/6ortryCysXN28sIdBl1tfBmnFMoN52kmu1L7j0OwDF1aIfzotwskyUi6QioQysGVfOQ5cdX7NrV8GkhDk04YzoTys0Z/jc5Ur0FmUKFC+IHzlMgK7AJ3IJQInl3drErMm36wO0nlgJ0vlPakxfsbXxBrnMBKK4TlV3Fup0Rm+EuajcmaUeJlJZ3ko1+SRTtVnnmdldvrsCGmjIoqiBQjIIeE/IfPj+r1etD6D/rcbDPFl+MhTSiHZr40hvHlaZinLN7Q8Yf1QAxyXADiSikh/samuulB6MOhZAy7nvdwo7I="
 
 before_install:
   # Install Hugo
@@ -25,16 +26,14 @@ before_deploy:
 deploy:
   - provider: pages
     skip-cleanup: true
-    github-token:
-      secure: "RloZKF5nDpKeULUT/kakxNtpNux6SOLILtZ23gePwBTkJRWrSnmbJ6ODvxfLXpRTP1iZ/ICmv9gYol+qSpeDEsd+iDvn1lmZhnKuEcbG66XFzKi9qAeA8/SMqjuIXbGVjw1PWKCuBa2DG1MJ6+V6zUGGhUgY+hSX44L1HV5H4zDaTd2VI5Rmt9zVDRewh0niXmFA5+WuJRyhvbM6kXPVcX46ayGIugVHiEbTuqAhMA7Mv3QCI6yNN3rzAyxuqSEnS4EgIq3BuoTAFVXldm5bHgabrtrBKEg2Yayl8Wyh/D2OUDo9NrO4YrHoPcNC1LaDxmvU+otSm3NLHsj4tphr8dr/eVUxa7Q8XCy4hFv8ZPDA/mdzWznOv63ZQWcXFbBaCAib9+VC1Z7zzTcntacLUpUwyGwg+tybn9yrKgPIFD8a0pvJSx1aVwNRpuKd5MfHq/1LStYD4Z8dENBbny4Jwst+BAbl37sbXbekaVRxeqcCblzJX8/VCFmrRd12CBx6fu39zHGdQ/23rdpr6DUO0VTYSHdVtyXroNWjododO7Up5ivnptZNEM0qkR3ekUm2oczyV4vzFd0jRW64nALxSqIrXyKf5AcyHmGlW83ckMNLljDWFdUys1/80y/rSPNb1RYrHeuWCi5Vfq/3V1bFY0YlGktS5FEGVc++rJJ9oMs="
+    github-token: $GITHUB_TOKEN
     keep-history: true
     local-dir: public
     on:
       branch: master
     target-branch: gh-pages
   - provider: releases
-    api_key:
-      secure: "RloZKF5nDpKeULUT/kakxNtpNux6SOLILtZ23gePwBTkJRWrSnmbJ6ODvxfLXpRTP1iZ/ICmv9gYol+qSpeDEsd+iDvn1lmZhnKuEcbG66XFzKi9qAeA8/SMqjuIXbGVjw1PWKCuBa2DG1MJ6+V6zUGGhUgY+hSX44L1HV5H4zDaTd2VI5Rmt9zVDRewh0niXmFA5+WuJRyhvbM6kXPVcX46ayGIugVHiEbTuqAhMA7Mv3QCI6yNN3rzAyxuqSEnS4EgIq3BuoTAFVXldm5bHgabrtrBKEg2Yayl8Wyh/D2OUDo9NrO4YrHoPcNC1LaDxmvU+otSm3NLHsj4tphr8dr/eVUxa7Q8XCy4hFv8ZPDA/mdzWznOv63ZQWcXFbBaCAib9+VC1Z7zzTcntacLUpUwyGwg+tybn9yrKgPIFD8a0pvJSx1aVwNRpuKd5MfHq/1LStYD4Z8dENBbny4Jwst+BAbl37sbXbekaVRxeqcCblzJX8/VCFmrRd12CBx6fu39zHGdQ/23rdpr6DUO0VTYSHdVtyXroNWjododO7Up5ivnptZNEM0qkR3ekUm2oczyV4vzFd0jRW64nALxSqIrXyKf5AcyHmGlW83ckMNLljDWFdUys1/80y/rSPNb1RYrHeuWCi5Vfq/3V1bFY0YlGktS5FEGVc++rJJ9oMs="
+    api_key: $GITHUB_TOKEN
     file: public.tar.bz2
     skip_cleanup: true
     on:
