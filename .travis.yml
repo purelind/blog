@@ -1,0 +1,46 @@
+language: generic
+
+sudo: false
+
+env:
+  global:
+  - HUGO_VERSION=0.52
+
+before_install:
+  # Install Hugo
+  - mkdir -p bin
+  - curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz -o bin/hugo.tar.gz
+  - tar xzvvf bin/hugo.tar.gz -C ./bin
+
+script:
+  - "./bin/hugo"
+
+before_deploy:
+  # Set up git user name and tag this commit
+  #- git config --local user.name "YOUR GIT USER NAME"
+  #- git config --local user.email "YOUR GIT USER EMAIL"
+  - git tag "$(date +'%Y%m%d_%H%M%S')-$(git log --format=%h -1)"
+  - tar cjvf public.tar.bz2 public/
+
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token:
+      secure: qG+/QIGlJyi7kVBkeGppofgUgyeZQo/Lo9InB+x4CYkCF5boY4w48FOkNooUj3Qp4eMByyTNfty8/rymlRq6q3FrTBkQjOJOKWdbBhvAJH2bQ7ebln5BDPdqvkmQaYYkkcirjsL1rQcQSXWmWJKSDfAMm4y70qjH7IaKTop/lH9DN6Uvun1YjeVs0tNNslQPjvfCg1pDdgaWVi6nAnVuvk5v8l/ghqS3K5K3D38SBukl0W0ZWDW+SDWPdfSmaxjXBNnQyiGTUiZD8YgV4+dO0zFALA3FfA1XxzeGzkGRvgZOSGg8msCkOqXWzrlRjg4qHoqwawosM0YMVqsPxvu6wPy4Q31AzCQLzBffPcQMe61dnAmMPSUCagtFgsHFd2Atyf2vCs3ih21BIM758cIDMRO/DVA7VcRjU8qKtlsedea4TK6qHci79/YtgmGXF+uIpluxnBi9M2eitdklvMlPgrU9g7dFvUFICL+Eo98pYnf2+5yrS/S3gmbIpEonNZK9NmorChgOhL8VT9sE8Ailvcb97eN10azb1kvlT8KcMYOcxbp7ZnKA3Owj/PxXdA9IbTrXm5ixrNvNI1kfMfvsySufEamMFZe2ARuitPRCo83Hdjb/DSqj6423YoPkMIxsqlufX8o9ZVxm9Gy37+CGcIop3iroXlLjfVfDI3qW/XU=
+    keep-history: true
+    local-dir: public
+    on:
+      branch: master
+    target-branch: gh-pages
+  - provider: releases
+    api_key:
+      secure: qG+/QIGlJyi7kVBkeGppofgUgyeZQo/Lo9InB+x4CYkCF5boY4w48FOkNooUj3Qp4eMByyTNfty8/rymlRq6q3FrTBkQjOJOKWdbBhvAJH2bQ7ebln5BDPdqvkmQaYYkkcirjsL1rQcQSXWmWJKSDfAMm4y70qjH7IaKTop/lH9DN6Uvun1YjeVs0tNNslQPjvfCg1pDdgaWVi6nAnVuvk5v8l/ghqS3K5K3D38SBukl0W0ZWDW+SDWPdfSmaxjXBNnQyiGTUiZD8YgV4+dO0zFALA3FfA1XxzeGzkGRvgZOSGg8msCkOqXWzrlRjg4qHoqwawosM0YMVqsPxvu6wPy4Q31AzCQLzBffPcQMe61dnAmMPSUCagtFgsHFd2Atyf2vCs3ih21BIM758cIDMRO/DVA7VcRjU8qKtlsedea4TK6qHci79/YtgmGXF+uIpluxnBi9M2eitdklvMlPgrU9g7dFvUFICL+Eo98pYnf2+5yrS/S3gmbIpEonNZK9NmorChgOhL8VT9sE8Ailvcb97eN10azb1kvlT8KcMYOcxbp7ZnKA3Owj/PxXdA9IbTrXm5ixrNvNI1kfMfvsySufEamMFZe2ARuitPRCo83Hdjb/DSqj6423YoPkMIxsqlufX8o9ZVxm9Gy37+CGcIop3iroXlLjfVfDI3qW/XU=
+    file: public.tar.bz2
+    skip_cleanup: true
+    on:
+      branch: master
+
+# whitelist
+branches:
+  only:
+    - master 
