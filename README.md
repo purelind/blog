@@ -1,5 +1,5 @@
 # 关于
-[![Build Status](https://travis-ci.org/purelind/blog.svg?branch=master)](https://travis-ci.org/purelind/blog)
+![CI](https://github.com/purelind/blog/workflows/CI/badge.svg)
 
 Personal blog: https://purelind.com
 
