@@ -36,9 +36,13 @@ jobs:
         name: my-artifact
         path: my_public.tar
     
-    - uses: jakejarvis/backblaze-b2-action@master
-      env:
-        SOURCE_DIR: './public'
-        B2_BUCKET: ${{ secrets.B2_BUCKET }}
-        B2_APPKEY_ID: ${{ secrets.B2_APPKEY_ID }}
-        B2_APPKEY: ${{ secrets.B2_APPKEY }}
+    - name: Copy blog content recursively to remote
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: public
+        remote: /var/www/html
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        
