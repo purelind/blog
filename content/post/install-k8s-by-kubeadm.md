@@ -1,37 +1,51 @@
 ---
 title: "通过kubeadm安装k8s"
-date: 2021-01-16T23:57:32+08:00
-lastmod: 2021-01-16T23:57:32+08:00
+date: 2021-01-16T18:38:09+08:00
+lastmod: 2021-01-16T18:38:09+08:00
 draft: true
-keywords: ['install kubernetes by kubeadm']
-description: ""
-tags: ['科技','笔记','k8s','kubeadm']
-categories: ['笔记']
-author: "purelind"
+keywords: ["k8s"]
+description: "install k8s with kubeadm"
+tags: ["sre","k8s","kubeadm"]
+categories: ["笔记"]
+author: ""
 
+# You can also close(false) or open(true) something for this content.
+# P.S. comment can only be closed
 comment: false
 toc: false
 autoCollapseToc: false
 postMetaInFooter: false
 hiddenFromHomePage: false
+# You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: false
 reward: false
 mathjax: false
 mathjaxEnableSingleDollar: false
 mathjaxEnableAutoNumber: false
+
+# You unlisted posts you might want not want the header or footer to show
 hideHeaderAndFooter: false
+
+# You can enable or disable out-of-date content warning for individual post.
+# Comment this out to use the global config.
+#enableOutdatedInfoWarning: false
+
 flowchartDiagrams:
   enable: false
   options: ""
+
 sequenceDiagrams: 
   enable: false
   options: ""
+
 ---
 
-> 如何在国内公有云服务器通过`kubeadm`部署`kubernetes`
-# 通过kubeadm安装k8s
 
-通过kubeadm我们可以很方便的创建GA可用的kubernetes集群，国内通过该方式安装的过程中我们通常会因为网络问题导致一些镜像包无法下载。此处记录一下如何通过修改镜像源地址来正常安装。本次测试我们适用国内任一云厂商的三台虚拟机，操作系统为Ubuntu20.04，安装kubernetes 1.18.15
+
+> 如何在国内公有云服务器通过`kubeadm`部署`kubernetes`
+
+通过kubeadm我们可以很方便的创建GA的kubernetes集群，国内通过该方式安装的过程中我们通常会因为网络问题导致一些镜像包无法下载。此处记录一下如何通过修改镜像源地址来正常安装。本次测试我们适用国内任一云厂商的三台虚拟机，操作系统为Ubuntu20.04，安装kubernetes 1.18.15
+<!--more-->
 
 #准备工作
 国内云厂商直接申请三台虚拟机，这些机器需要满足以下几个条件即可
